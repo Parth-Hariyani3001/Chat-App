@@ -13,27 +13,33 @@ function ChatInput({ handleSendMessage }) {
   };
 
   const handleEmojiClick = (e) => {
-    console.log(e)
+    console.log(e);
     let message = msg;
-    
+
     message += e.emoji;
+    message = message.toString();
     setMsg(message);
   };
 
   const sendChat = (event) => {
     event.preventDefault();
-    if(msg.length > 0){
-      handleSendMessage(msg);
-      setMsg('')
+    if (msg.length > 0) {
+      handleSendMessage(msg.toString());
+      setMsg("");
     }
-  }
+  };
 
   return (
     <Container>
       <div className="button-container">
         <div className="emoji">
           <BsEmojiSmileFill onClick={handleEmojiPickerHideShow} />
-          {showEmogiPicker && <Picker className="emoji-picker-react" onEmojiClick={handleEmojiClick} />}
+          {showEmogiPicker && (
+            <Picker
+              className="emoji-picker-react"
+              onEmojiClick={handleEmojiClick}
+            />
+          )}
         </div>
       </div>
       <form onSubmit={(e) => sendChat(e)} className="input-container">

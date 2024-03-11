@@ -2,7 +2,9 @@ const Message = require("./../model/messageModel")
 
 const addMessage = async(req,res,next) => {
     try{
-        const {from,to,message} = req.body;
+        let {from,to,message} = req.body;
+        console.log(message);
+        console.log(typeof message)
         const data = await Message.create({
             message: {text: message},
             users: [from, to],
@@ -37,7 +39,6 @@ const getAllMessages = async (req, res, next) => {
           message: msg.message.text,
         };
       });
-      console.log(projectedMessages)
       return res.json(projectedMessages);
     } catch (ex) {
       next(ex);
