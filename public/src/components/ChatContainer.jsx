@@ -24,7 +24,7 @@ function ChatContainer({ currentChat, currentUser, socket }) {
       }
     }
     getMessages();
-  }, [currentChat, currentUser, messages]);
+  }, [currentChat, currentUser, arrivalMessage]);
 
   const handleSendMessage = async (msg) => {
     const data = await JSON.parse(localStorage.getItem("chat-app-user"));
@@ -38,6 +38,9 @@ function ChatContainer({ currentChat, currentUser, socket }) {
       to: currentChat._id,
       message: msg,
     });
+    const msgs = [...messages];
+    msgs.push({ fromSelf: true, message: msg });
+    setMessages(msgs);
   };
 
   useEffect(() => {
